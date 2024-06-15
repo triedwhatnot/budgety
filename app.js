@@ -11,7 +11,7 @@ var budgetController = (function() {
     
     Expense.prototype.calcPercentage = function(totalIncome) {
         if (totalIncome > 0) {
-            this.percentage = Math.round((this.value / totalIncome) * 100);
+            this.percentage = +((this.value / totalIncome) * 100).toFixed(1);
         } else {
             this.percentage = -1;
         }
@@ -115,7 +115,7 @@ var budgetController = (function() {
             
             // calculate the percentage of income that we spent
             if (data.totals.inc > 0) {
-                data.percentage = Math.round((data.totals.exp / data.totals.inc) * 100);
+                data.percentage = +((data.totals.exp / data.totals.inc) * 100).toFixed(1);
             } else {
                 data.percentage = -1;
             }            
@@ -157,10 +157,6 @@ var budgetController = (function() {
                 percentage: data.percentage
             };
         },
-        
-        testing: function() {
-            console.log(data);
-        }
     };
     
 })();
@@ -452,7 +448,6 @@ var controller = (function(budgetCtrl, UICtrl) {
     
     return {
         init: function() {
-            console.log('Application has started.');
             UICtrl.displayMonth();
             UICtrl.displayBudget({
                 budget: 0,
